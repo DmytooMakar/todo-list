@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+
+import './App.scss';
+
+import FormForGetData from './components/Form/FormForGetData';
+import Tasks from './components/Tasks/Tasks';
 
 function App() {
+  const [ tasks, setTasks ] = useState([]);
+
+    function reload() {
+        axios.get(`http://localhost:3030/tasks`)
+        .then(data => { console.log( data.data )
+        setTasks(data.data)})
+    }
+
+    useEffect(() => {
+        reload()
+    }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container bg-light">
+      <div className="d-flex">
+        <FormForGetData reload={reload} />
+        <Tasks tasks={tasks} reload={reload}/>
+      </div>
     </div>
   );
 }
