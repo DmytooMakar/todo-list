@@ -6,8 +6,11 @@ import './App.scss';
 import FormForGetData from './components/Form/FormForGetData';
 import Tasks from './components/Tasks/Tasks';
 
+import { Context } from './Context';
+
 function App() {
   const [ tasks, setTasks ] = useState([]);
+  const [ dataForEdit, setDataForEdit ] = useState(null);
 
     function reload() {
         axios.get(`http://localhost:3030/tasks`)
@@ -22,11 +25,14 @@ function App() {
   return (
     <div className="container bg-light">
       <div className="d-flex">
-        <FormForGetData reload={reload} />
-        <Tasks tasks={tasks} reload={reload}/>
+        <Context.Provider value={{ reload, dataForEdit, setDataForEdit, tasks }}>
+          <FormForGetData />
+          <Tasks />
+        </Context.Provider>
       </div>
     </div>
   );
 }
-
+// reload={reload} dataForEdit={dataForEdit} setDataForEdit={setDataForEdit}
+// tasks={tasks} reload={reload} setDataForEdit={setDataForEdit} dataForEdit={dataForEdit}
 export default App;

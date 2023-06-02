@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "react-bootstrap/Table"
 
 import RenderTasks from "./RenderTasks";
 
 import "./TasksStyle.scss"
+import { Context } from "../../Context";
 
-export default function Tasks({ tasks, reload}) {
+export default function Tasks() {
+
+    const { tasks } = useContext(Context);
 
     return <div className="tasks" >
         <Table  striped bordered hover variant="dark">
@@ -17,7 +20,7 @@ export default function Tasks({ tasks, reload}) {
                 </tr>
             </thead>
             <tbody>
-                { tasks.map(task => <RenderTasks key={task.id} task={task} reload={reload} />) }
+                { tasks.map(task => <RenderTasks key={task.id} task={task} />) }
             </tbody>
         </Table>
     </div>
