@@ -4,6 +4,8 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { Context } from "../../Context";
 
+import "./RenderTasksStyle.scss";
+
 export default function RenderTasks({ task }) {
     const { reload, setDataForEdit, dataForEdit } = useContext(Context);
 
@@ -22,7 +24,7 @@ export default function RenderTasks({ task }) {
     }
 
     return <>
-        <tr>
+        <tr >
             <td>{task.id}</td>
             <td>{task.name}</td>
             <td className="">
