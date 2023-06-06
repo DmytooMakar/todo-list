@@ -33,6 +33,5 @@ function App() {
     </div>
   );
 }
-// reload={reload} dataForEdit={dataForEdit} setDataForEdit={setDataForEdit}
-// tasks={tasks} reload={reload} setDataForEdit={setDataForEdit} dataForEdit={dataForEdit}
+
 export default App;

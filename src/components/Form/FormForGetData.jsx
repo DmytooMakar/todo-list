@@ -18,9 +18,9 @@ export default function FormForGetData() {
 
     function validation() {
         if ( nameRef.current.value === '' || nameRef.current.value.length > 15 ){
-            return (false, setDanger({ name: true, description: false }), alert("Enter valid value no more than 15 characters"));
+            return ( false, setDanger({ name: true, description: false }), alert("Enter valid value no more than 15 characters") );
         } else if ( descriptionRef.current.value === '' || descriptionRef.current.value.length > 20 ) {
-            return (false, setDanger({ name: false, description: true }), alert("Enter valid value no more than 20 characters"));
+            return ( false, setDanger({ name: false, description: true }), alert("Enter valid value no more than 20 characters") );
         } else return true
     };
 
@@ -52,6 +52,11 @@ export default function FormForGetData() {
             reload();
             setDataForEdit(null);
         })
+        .catch(() => { 
+            alert('Sorry this task was deleted'); 
+            reload();
+            setDataForEdit(null);
+        })
     };
     
     function clearInput() {
@@ -71,11 +76,16 @@ export default function FormForGetData() {
                     <p className="mb-0">Description :</p>
                 </div>
                 <div>
-                    <Form.Control className="mb-1" ref={nameRef} key={dataForEdit?.id + 'a'} defaultValue={ dataForEdit ? dataForEdit.name : '' } size="sm" type="text" placeholder="Enter name task" />
-                    <Form.Control ref={descriptionRef} key={dataForEdit?.id + 'b'} defaultValue={ dataForEdit ? dataForEdit.description : '' } size="sm" type="text" placeholder="Enter description task" />
+                    <Form.Control className="mb-1" ref={nameRef}
+                    key={dataForEdit?.id + 'a'} defaultValue={ dataForEdit ? dataForEdit.name : '' } 
+                    size="sm" type="text" placeholder="Enter name task" />
+                    <Form.Control ref={descriptionRef} key={dataForEdit?.id + 'b'} 
+                    defaultValue={ dataForEdit ? dataForEdit.description : '' } size="sm" 
+                    type="text" placeholder="Enter description task" />
                 </div>
             </div>
         </Form.Group>
-        <Button className={ danger.name ? 'btn-danger' : danger.description ? 'btn-danger' : 'btn-success' } onClick={ dataForEdit ? updateTask : submitToDo }>{ dataForEdit ? 'Update' : 'Submit' }</Button>
+        <Button className={ danger.name ? 'btn-danger' : danger.description ? 'btn-danger' : 'btn-success' } 
+        onClick={ dataForEdit ? updateTask : submitToDo }>{ dataForEdit ? 'Update' : 'Submit' }</Button>
     </div>
 }
